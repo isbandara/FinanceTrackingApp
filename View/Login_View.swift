@@ -17,9 +17,10 @@ struct Login_View: View {
         NavigationView{
             
             VStack{
-                Image(systemName: "lock.sheild.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
+                Image("imagelogin")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
                     .padding(.bottom, 20)
                 
                 Text("Finance-Tracking")

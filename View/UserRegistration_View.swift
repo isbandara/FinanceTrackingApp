@@ -29,13 +29,13 @@ struct UserRegistration_View: View {
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15)
             
-            TextField("password", text: $password)
+            SecureField("password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15)
             
-            TextField("Confirm password", text: $confirmPassword)
+            SecureField("Confirm password", text: $confirmPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .background(Color(.secondarySystemBackground))
