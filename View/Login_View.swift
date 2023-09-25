@@ -25,7 +25,7 @@ struct Login_View: View {
                 Text("Finance-Tracking")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.primary)
                     .padding(.bottom, 60)
                 
                 
