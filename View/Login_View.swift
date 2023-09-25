@@ -17,24 +17,23 @@ struct Login_View: View {
         NavigationView{
             
             VStack{
-                Image("imagelogin")
+                Image("imagelogin2")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .padding(.bottom, 20)
-                
+                    .frame(width: 200, height: 200)
+                    .padding(.bottom, 10)
+             
                 Text("Finance-Tracking")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
-                    .padding(.bottom, 60)
-                
-                
+                    .padding(.bottom, 10)
+                    
                 Text("Login")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
-                    .padding(.bottom, 30)
+                    .padding(.bottom, 10)
                 
                 TextField("Email", text:$Email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -69,7 +68,7 @@ struct Login_View: View {
                         .foregroundColor(.blue)
                         .frame(maxWidth: .infinity)
                         .shadow(radius: 2)
-                        .padding(.bottom, 100)
+                        .padding(.bottom, 10)
                 }
                         
                 
@@ -79,11 +78,13 @@ struct Login_View: View {
                         .foregroundColor(.blue)
                         .frame(maxWidth: .infinity)
                         .shadow(radius: 2)
-                        .padding(.bottom, 15)
-                }
+                        .padding(.bottom, 20)
+                
+                    
+                       }
                         
                     }
-                
+            
             }
             .padding()
         }
