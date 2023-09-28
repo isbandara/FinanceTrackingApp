@@ -16,6 +16,16 @@ struct UserRegistration_View: View {
     
     var body: some View {
        
+        ZStack{
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .fill(
+                            LinearGradient(gradient: Gradient(colors: [.green, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                        )
+                        .frame(width: 1000, height: 400)
+                        .rotationEffect(.degrees(135))
+                        .offset(y: -450)
+        
+        
         VStack{
             Text("Create an account")
                 .font(.largeTitle)
@@ -26,18 +36,21 @@ struct UserRegistration_View: View {
             TextField("Email", text: $Email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .frame(width: 380, height: 80, alignment: .center)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15)
             
             SecureField("password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .frame(width: 380, height: 80, alignment: .center)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15)
             
             SecureField("Confirm password", text: $confirmPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .frame(width: 380, height: 80, alignment: .center)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15)
             
@@ -49,7 +62,8 @@ struct UserRegistration_View: View {
                     Text("Sign Up")
                         .font(.title)
                         .padding()
-                        .frame(maxWidth: .infinity)
+                        //.frame(maxWidth: .infinity)
+                        .frame(width: 300, height: 60, alignment: .center)
                         .background(Color.red)
                         .foregroundColor(.white)
                         .cornerRadius(20)
@@ -59,22 +73,25 @@ struct UserRegistration_View: View {
         .padding()
         
         HStack{
+            
         NavigationLink(destination: Login_View()){
             Text("Alredy have an account?")
                 .font(.headline)
                 .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
+               // .frame(maxWidth: .infinity)
                 .shadow(radius: 2)
+                .padding(.top, 500)
+            
             Text("Sign In")
                 .font(.headline)
                 .foregroundColor(.red)
-                .frame(maxWidth: .infinity)
+              //  .frame(maxWidth: .infinity)
                 .shadow(radius: 2)
-            
+                .padding(.top, 500)
         }
         }
         }
-        
+    }
 }
 
 struct UserRegistration_View_Previews: PreviewProvider {

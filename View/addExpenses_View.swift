@@ -7,7 +7,11 @@
 
 import SwiftUI
 
+
 struct addExpenses_View: View {
+    
+    @ObservedObject var addExpenseViewModel = AddExpense_ViewModel()
+    
     @State private var selectDate = Date()
     @State private var selectedCategory = "Food"
     @State private var amount = ""
@@ -18,18 +22,23 @@ struct addExpenses_View: View {
     @State private var isAmountValid = true
     @State private var isDescriptionValid = true
     @State private var isLocationValid = true
-
+    @State private var isFormValid = true
+    @State private var showAlert = false
     
     var body: some View {
         
         NavigationView{
+            
+           
             Form{
                 Spacer()
                 Section {
-                    DatePicker("Date", selection: $selectDate, displayedComponents: [.date, .hourAndMinute])
+
+                       
+                    DatePicker("Date",selection:$selectDate,displayedComponents:[.date,.hourAndMinute])
                                             
                     Text("Category")
-                    Picker("Category", selection: $selectedCategory){
+                    Picker("", selection: $selectedCategory){
                         Text("Food").tag("Food")
                         Text("Utilities").tag("Utilities")
                         Text("Transport").tag("Transport")
@@ -39,49 +48,50 @@ struct addExpenses_View: View {
                     .pickerStyle(MenuPickerStyle())
                     
                     Text("Amount")
-                    TextField("Amount", text: $amount)
+                    TextField("", text: $amount)
                         .keyboardType(.decimalPad)
-                        .onChange(of: amount) { newValue in
-                            isAmountValid = isAmountValid (newValue)
-                        }
+                     //   .onChange(of: amount) { newValue in
+                     //     isAmountValid = isAmountValid(newValue)
+                     //  }
                         if !isAmountValid{
                             Text("Invalid amount")
                                 .foregroundColor(.red)
                         }
                     
                     Text("Description")
-                    TextField("Description", text: $description)
-                        .onChange(of: description) { newValue in
-                            isDescriptionValid = isDescriptionValid(newValue)
-                        }
-                        if !isDescriptionValid{
+                    TextField("", text: $description)
+                   //     .onChange(of: description) { newValue in
+                   //         isDescriptionValid = isDescriptionValid(newValue)
+                    //}
+                        if !isDescriptionValid {
                             Text("Description is required")
                                 .foregroundColor(.red)
                         }
                     
                     
                     Text("Location")
-                    TextField("Location", text: $location)
-                        .onChange(of: location) { newValue in
-                            isLocationValid = isLocationValid(newValue)
-                        }
-                        if !isDescriptionValid{
-                            Text("Location is required")
-                                .foregroundColor(.red)
-                        }
+                    TextField("", text: $location)
+                    //.onChange(of: location) { newValue in
+                   //         isLocationValid = isLocationValid(newValue)
+                    //}
+                      //  if !isLocationValid {
+                       //     Text("Location is required")
+                        //        .foregroundColor(.red)
+                        //}
 
                 }
                 //button to submit data
                 Section{
                     Button( action: {
-                        if isFormValid(){
-                            submitExpense()
+                       // if isFormValid(){
+                           // submitExpense()
                         }
-                        else {
-                            Text("Please enter valid input")
-                        }
+                        //else {
+                            
+                         //   showAlert = true                        }
                         
-                    }) {
+                   // }
+                ) {
                         Text("Submit Expense")
                             .font(.title)
                             .padding()
@@ -92,42 +102,24 @@ struct addExpenses_View: View {
                         
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
-                    .disabled(!isFormValid())
+                //    .disabled(!isFormValid())
             }
         }
             .navigationBarTitle("Add Expenses")
             
     }
-}
-    //Validation functions
-    func isAmountValid(_ amount: String) -> Bool {
-        if let number = Double(amount), number >= 0{
-            return true
+        .alert(isPresented: $showAlert){
+            Alert(
+                  title: Text("Validation Error"),
+                  message: Text("Please enter valid input for all fields."),
+                  dismissButton: .default(Text("OK")))
         }
-        return false
     }
+}
     
-    func isDescriptionValid(_ description: String) -> Bool {
-        return !description.isEmpty
-    }
-    func isLocationtionValid(_ location: String) -> Bool {
-        return !location.isEmpty
-    }
-    
-    //Form validations
-    func isFormValid() -> Bool {
-        return isAmountValid && isDescriptionValid && isLocationValid
-    }
-    
-    //function to submit the expense data to database
-    func submitExpense(){
-       
-        
-    }
-
 struct addExpenses_View_Previews: PreviewProvider {
     static var previews: some View {
         addExpenses_View()
     }
 }
-}
+
