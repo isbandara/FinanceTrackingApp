@@ -11,6 +11,7 @@ import Firebase
 
 @main
 struct FinanceTrackingAppApp: App {
+    
     init(){
         FirebaseApp.configure()
     }

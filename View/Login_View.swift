@@ -12,9 +12,7 @@ struct Login_View: View {
     
     @ObservedObject var loginViewModel = Login_ViewModel()
     
-    @State private var Email = ""
-    @State private var password = ""
-    
+
     var body: some View {
       
 
@@ -36,12 +34,6 @@ struct Login_View: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 200)
                     .padding(.bottom, 5)
-             
-                Text("Finance-Tracking")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, 10)
                     
                 Text("Welcome")
                     .font(.largeTitle)
@@ -49,14 +41,14 @@ struct Login_View: View {
                     .foregroundColor(.blue)
                     .padding(.bottom, 10)
                 
-                TextField("Email", text:$Email)
+                TextField("Email", text: $loginViewModel.user_model.Email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .frame(width: 380, height: 80, alignment: .center)
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(12)
                 
-                SecureField("Password", text: $password)
+                SecureField("Password", text: $loginViewModel.user_model.password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .frame(width: 380, height: 80, alignment: .center)
@@ -77,7 +69,10 @@ struct Login_View: View {
                         .cornerRadius(20)
                     
                 }
-                NavigationLink(destination: Dashboard_View(), isActive: $loginViewModel.isLoggedIn){}
+                NavigationLink(destination: Dashboard_View(), isActive: $loginViewModel.isLoggedIn){
+                    
+                    
+                }
                     
             
                                 

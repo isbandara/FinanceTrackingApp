@@ -29,7 +29,7 @@ class Login_ViewModel : ObservableObject
         
         Auth.auth().signIn(withEmail: user_model.Email, password: user_model.password)
             {
-            Result , error in
+            result , error in
             
             if error != nil
             {

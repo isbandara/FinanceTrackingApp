@@ -70,7 +70,7 @@ struct addExpenses_View: View {
                     
                     
                     Text("Location")
-                    TextField("", text: $location)
+                 //   TextField("", text: $location)
                     //.onChange(of: location) { newValue in
                    //         isLocationValid = isLocationValid(newValue)
                     //}

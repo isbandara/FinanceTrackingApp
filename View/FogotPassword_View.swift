@@ -9,9 +9,8 @@ import SwiftUI
 
 struct FogotPassword_View: View {
     
-    @State private var Email = ""
-    @State private var isResettingPassword = false
-    @State private var resetPasswordressult: Bool? = nil
+    
+    @ObservedObject var fogotPassword_ViewModel = ForgotPassword_ViewModel()
     
     var body: some View {
         
@@ -41,16 +40,22 @@ struct FogotPassword_View: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 20)
             
-            TextField("Enter email", text: $Email)
+            TextField("Enter email", text: $fogotPassword_ViewModel.user_model.Email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .frame(width: 380, height: 80, alignment: .center)
                 .cornerRadius(50)
                 .accessibilityLabel("Email Address")
+                .alert(isPresented: $fogotPassword_ViewModel.successReset) {
+                    Alert(title: Text("Email not Valid"), message: Text("Please check your email"), dismissButton: .default(Text("OK"))
+                        {
+                        fogotPassword_ViewModel.dismissAlert()
+                    })}
             
             Button(action: {
-                resetPassword()
+                
+                fogotPassword_ViewModel.resPass(email: fogotPassword_ViewModel.user_model.Email)
             })
             {
                 Text("Reset Password")
@@ -61,14 +66,15 @@ struct FogotPassword_View: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(20)
+                    .alert(isPresented: $fogotPassword_ViewModel.successReset) {
+                                            Alert(title: Text("Done"), message: Text("Password reset link sent"), dismissButton: .default(Text("OK"))
+                                                {
+                                                fogotPassword_ViewModel.dismissAlert()
+                                            })}
                
                     }
                     .padding()
-                
-                if let resetResult = resetPasswordressult{
-                    Text (resetResult ? "Password reset email sent successfully" : "Password reset failed")
-                        .foregroundColor(resetResult ? .green : .red)
-                        .padding()
+
                 }
 
             }
@@ -76,14 +82,9 @@ struct FogotPassword_View: View {
             
         }
     }
-}
 
-private func resetPassword(){
-   // isResettingPassword = true
-    
-   // resetPasswordResult = true
-  //  isResettingPassword = false
-}
+
+
 
 struct FogotPassword_View_Previews: PreviewProvider {
     static var previews: some View {

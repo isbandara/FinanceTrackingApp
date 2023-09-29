@@ -9,9 +9,7 @@ import SwiftUI
 
 struct UserRegistration_View: View {
     
-    @State private var Email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
+@ObservedObject var createAccountViewModel = CreateAccount_ViewModel()
 
     
     var body: some View {
@@ -33,29 +31,47 @@ struct UserRegistration_View: View {
                 .foregroundColor(.primary)
                 .padding(.bottom, 60)
             
-            TextField("Email", text: $Email)
+            TextField("Email", text: $createAccountViewModel.user_model.Email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .frame(width: 380, height: 80, alignment: .center)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(15)
+                .alert(isPresented: $createAccountViewModel.notValidMail) {
+                                        Alert(title: Text("Invalid Email"), message: Text("Please check your Email "), dismissButton: .default(Text("OK"))
+                                            {
+                                            createAccountViewModel.errorAlert()
+                                        })}
+            
+            SecureField("password", text: $createAccountViewModel.user_model.password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .frame(width: 380, height: 80, alignment: .center)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(15)
+                .alert(isPresented: $createAccountViewModel.notValidPass) {
+                                        Alert(title: Text("Wrong Password"), message: Text("Please check your Password "), dismissButton: .default(Text("OK"))
+                                            {
+                                            createAccountViewModel.errorAlert()
+                                        })}
+            
+            
+            SecureField("Confirm password", text: $createAccountViewModel.user_model.confirmPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .frame(width: 380, height: 80, alignment: .center)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15)
             
-            SecureField("password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .frame(width: 380, height: 80, alignment: .center)
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(15)
-            
-            SecureField("Confirm password", text: $confirmPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .frame(width: 380, height: 80, alignment: .center)
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(15)
+                .alert(isPresented: $createAccountViewModel.notMatchedConfirmPass) {
+                                        Alert(title: Text("Password not mached"), message: Text("Please check your Password "), dismissButton: .default(Text("OK"))
+                                            {
+                                            createAccountViewModel.errorAlert()
+                                        })}
             
             Button(action: {
-                //handle registration
+                
+                createAccountViewModel.createAc(email: createAccountViewModel.user_model.Email, password: createAccountViewModel.user_model.password, confirmpassword: createAccountViewModel.user_model.confirmPassword)
                 
             }){
                 
@@ -67,6 +83,13 @@ struct UserRegistration_View: View {
                         .background(Color.red)
                         .foregroundColor(.white)
                         .cornerRadius(20)
+                        .alert(isPresented: $createAccountViewModel.successAccCreate) {
+                            Alert(title: Text("Success"), message: Text("Account has been created succesfully"), dismissButton: .default(Text("OK"))
+                                {
+                                createAccountViewModel.errorAlert()
+                            })}
+
+                
                 }
             .padding()
             }
@@ -93,9 +116,11 @@ struct UserRegistration_View: View {
         }
     }
 }
-
+        
+        
 struct UserRegistration_View_Previews: PreviewProvider {
     static var previews: some View {
         UserRegistration_View()
     }
 }
+
