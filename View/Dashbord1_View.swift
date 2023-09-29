@@ -74,7 +74,7 @@ struct Dashbord1_View: View {
             
             // Tab view with Swipe.....
             
-            T
+            
             //Dashbord Grid....
           
             LazyVGrid(columns: columns,spacing: 30){
