@@ -71,7 +71,7 @@ struct UserRegistration_View: View {
             
             Button(action: {
                 
-                createAccountViewModel.createAc(email: createAccountViewModel.user_model.Email, password: createAccountViewModel.user_model.password, confirmpassword: createAccountViewModel.user_model.confirmPassword)
+                createAccountViewModel.createAcc(email: createAccountViewModel.user_model.Email, password: createAccountViewModel.user_model.password, confirmpassword: createAccountViewModel.user_model.confirmPassword)
                 
             }){
                 

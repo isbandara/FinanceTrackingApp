@@ -69,7 +69,7 @@ struct Login_View: View {
                         .cornerRadius(20)
                     
                 }
-                NavigationLink(destination: Dashboard_View(), isActive: $loginViewModel.isLoggedIn){
+                NavigationLink(destination: Dashbord1_View(), isActive: $loginViewModel.isLoggedIn){
                     
                     
                 }

@@ -57,7 +57,7 @@ class CreateAccount_ViewModel : ObservableObject
     }
     
     
-    private func clearFields()
+    private func Fields()
     {
         user_model.Email = ""
         user_model.password = ""
@@ -67,7 +67,7 @@ class CreateAccount_ViewModel : ObservableObject
 
     
      
-    func createAc(email : String , password : String , confirmpassword : String)
+    func createAcc(email : String , password : String , confirmpassword : String)
    {
     
         
@@ -104,7 +104,7 @@ class CreateAccount_ViewModel : ObservableObject
                         else
                         {
                             self.successAccCreate = true
-                            self.clearFields()
+                            self.Fields()
                           
                         }
                         

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct addExpenses_View: View {
     
     @ObservedObject var addExpenseViewModel = AddExpense_ViewModel()
@@ -18,27 +17,19 @@ struct addExpenses_View: View {
     @State private var description = ""
     @State private var location = ""
     
-//Validation stste variables
-    @State private var isAmountValid = true
-    @State private var isDescriptionValid = true
-    @State private var isLocationValid = true
-    @State private var isFormValid = true
-    @State private var showAlert = false
+
     
     var body: some View {
         
-        NavigationView{
-            
+        NavigationView {
            
-            Form{
+            Form {
                 Spacer()
                 Section {
-
-                       
-                    DatePicker("Date",selection:$selectDate,displayedComponents:[.date,.hourAndMinute])
-                                            
+                    DatePicker("Date", selection: $selectDate, displayedComponents: .date)
+                    
                     Text("Category")
-                    Picker("", selection: $selectedCategory){
+                    Picker("", selection: $selectedCategory) {
                         Text("Food").tag("Food")
                         Text("Utilities").tag("Utilities")
                         Text("Transport").tag("Transport")
@@ -50,48 +41,22 @@ struct addExpenses_View: View {
                     Text("Amount")
                     TextField("", text: $amount)
                         .keyboardType(.decimalPad)
-                     //   .onChange(of: amount) { newValue in
-                     //     isAmountValid = isAmountValid(newValue)
-                     //  }
-                        if !isAmountValid{
-                            Text("Invalid amount")
-                                .foregroundColor(.red)
-                        }
-                    
+                       
                     Text("Description")
                     TextField("", text: $description)
-                   //     .onChange(of: description) { newValue in
-                   //         isDescriptionValid = isDescriptionValid(newValue)
-                    //}
-                        if !isDescriptionValid {
-                            Text("Description is required")
-                                .foregroundColor(.red)
-                        }
-                    
+                      
                     
                     Text("Location")
-                 //   TextField("", text: $location)
-                    //.onChange(of: location) { newValue in
-                   //         isLocationValid = isLocationValid(newValue)
-                    //}
-                      //  if !isLocationValid {
-                       //     Text("Location is required")
-                        //        .foregroundColor(.red)
-                        //}
-
+                    TextField("", text: $location)
+                       
                 }
-                //button to submit data
-                Section{
-                    Button( action: {
-                       // if isFormValid(){
-                           // submitExpense()
-                        }
-                        //else {
-                            
-                         //   showAlert = true                        }
+                
+                // Button to submit data
+                Section {
+                    Button(action: {
+                       
                         
-                   // }
-                ) {
+                    }) {
                         Text("Submit Expense")
                             .font(.title)
                             .padding()
@@ -99,27 +64,22 @@ struct addExpenses_View: View {
                             .background(Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(20)
-                        
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
-                //    .disabled(!isFormValid())
+                    
+                }
             }
-        }
             .navigationBarTitle("Add Expenses")
-            
-    }
-        .alert(isPresented: $showAlert){
-            Alert(
-                  title: Text("Validation Error"),
-                  message: Text("Please enter valid input for all fields."),
-                  dismissButton: .default(Text("OK")))
+        }
+       
+
         }
     }
-}
     
+   
+
 struct addExpenses_View_Previews: PreviewProvider {
     static var previews: some View {
         addExpenses_View()
     }
 }
-
