@@ -74,7 +74,7 @@ struct Login_View: View {
                     
                 }
                     
-            
+                .padding(.bottom,10)
                                 
                 NavigationLink(destination: FogotPassword_View()){
                     Text("Fogot Password?")

@@ -14,14 +14,14 @@ struct UserRegistration_View: View {
     
     var body: some View {
        
-        ZStack{
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .fill(
-                            LinearGradient(gradient: Gradient(colors: [.green, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
+       ZStack{
+           RoundedRectangle(cornerRadius: 30, style: .continuous)
+                      .fill(
+                          LinearGradient(gradient: Gradient(colors: [.green, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                       )
                         .frame(width: 1000, height: 400)
-                        .rotationEffect(.degrees(135))
-                        .offset(y: -450)
+                       .rotationEffect(.degrees(135))
+                      .offset(y: -450)
         
         
         VStack{
@@ -88,7 +88,6 @@ struct UserRegistration_View: View {
                                 {
                                 createAccountViewModel.errorAlert()
                             })}
-
                 
                 }
             .padding()
@@ -117,10 +116,8 @@ struct UserRegistration_View: View {
     }
 }
         
-        
 struct UserRegistration_View_Previews: PreviewProvider {
     static var previews: some View {
         UserRegistration_View()
     }
 }
-
